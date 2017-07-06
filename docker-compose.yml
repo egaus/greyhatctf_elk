@@ -21,3 +21,11 @@ logstash:
     - "$PWD/data/logs:/usr/share/logstash/logs"
   command: logstash -f /config-dir/logstash.conf -l /usr/share/logstash/logs
 
+loadscenarios:
+  build: ./loadscenarios
+  volumes:
+    - "$PWD/DROP_SCENARIO_FILES_HERE:/DROP_SCENARIO_FILES_HERE"
+    - "$PWD/data/logs:/logs"
+  links:
+    - elasticsearch
+
