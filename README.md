@@ -3,21 +3,25 @@ Toolset for CTF Defense Content
 This project supports the GreyHat CTF project:
 * Provides tools and scenarios
 
+The educational content can be found at [learn.greyhatctf.com](http://learn.greyhatctf.com/).  To register for a CTF, go to our [CTF site](http://play.ctf.greyhatctf.com).
 
 Prerequisites
 ------------
-Need python 2.7 and docker installed.  This project was built and tested on an Ubuntu 16.04 machine.
+Need docker and docker-compose installed.  This project was built and tested on an Ubuntu 16.04 machine.
 
 Usage Examples
 --------------
 1) Start the ELK Instance
-``python start.py``
+``docker-compose up``
 
 2) Load a scenario:
-``python load_scenario.py <scenario folder name>``
+``cp ./scenarios/defense101/scenario_01_vawtrak.tar.gz  DROP_SCENARIO_FILES_HERE``
 
 3) Stop toolset
-``python stop.py``
+``docker-compose down``
+
+Note: if you have any issue stopping the docker-compose instance, you can always open another terminal and run:
+``docker stop $(docker ps -a -q)``
 
 References
 ----------
