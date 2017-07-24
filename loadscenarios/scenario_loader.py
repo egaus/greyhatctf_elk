@@ -70,14 +70,19 @@ if __name__ == '__main__':
 
                     orig_start_time = json.loads(logs[0]).get('ts', 0)
                     os.remove(log_file)
+                    i = 0
 
                     with open(os.path.join(output_path, os.path.basename(log_file)), 'wb') as write_log:
                         for log in logs:
-                            log_dictionary = json.loads(log)
-                            event_time = log_dictionary.get('ts', -1)
-                            if event_time > -1:
-                                log_dictionary['ts'] = float(event_time) - orig_start_time + new_start_time
-                            write_log.write(json.dumps(log_dictionary) + '\n')
+                            i += 1
+                            try:
+                                log_dictionary = json.loads(log)
+                                event_time = log_dictionary.get('ts', -1)
+                                if event_time > -1:
+                                    log_dictionary['ts'] = float(event_time) - orig_start_time + new_start_time
+                                write_log.write(json.dumps(log_dictionary) + '\n')
+                            except Exception, e:
+                                print "Error loading line {} in {} - {}".format(i, log_file, str(e))
                 os.remove(zipfile)
                 os.rmdir(temp_path)
         else:
